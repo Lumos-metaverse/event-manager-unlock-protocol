@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { ethers } from 'ethers';
+import { WagmiConfig, createClient } from "wagmi";
+import Home from "./components/Home";
+
+const CHAIN_ID = 5;
+
+const client = createClient({
+  autoConnect: true,
+  provider: new ethers.providers.JsonRpcProvider(`https://rpc.unlock-protocol.com/${CHAIN_ID}`, CHAIN_ID),
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <WagmiConfig client={client}>
+      <Home />
+    </WagmiConfig>
   );
 }
 
